@@ -1,0 +1,55 @@
+﻿<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Example</title>
+    <script src="https://unpkg.com/mqtt/dist/mqtt.min.js"></script>
+    <style>
+	table, td {
+	border: 1px solid black;
+	}
+	</style>
+  </head>
+  <body>
+	  
+	<h3>Counts provided by a Geiger Counter. Updated each 10 seconds</h3></h3>
+	<p>Made by L. Felipe Ramirez for Física Experimental III. 2024-1.</p>
+    <button id="button">Clear Last Value</button>
+    <table id="myTable">
+		<tr>
+			<td>Counts</td>
+		</tr>
+	</table>
+
+    <script>
+       const output = document.createElement("output");
+       output.setAttribute("type", "text");
+       output.value = "..."
+       document.body.appendChild(output);
+	
+      const client = mqtt.connect('wss://wemosesp32battery:public@wemosesp32battery.cloud.shiftr.io', {
+        clientId: 'javascript'
+      });
+      
+      client.on('connect', function() {
+        console.log('connected!');
+        client.subscribe('GeigerCounts');
+      });
+      client.on('message', function(topic, message) {
+        console.log(topic + ': ' + message.toString());
+        output.value = 'Current Value: ' + message.toString();
+        var tab=document.getElementById("myTable");
+        var row = tab.insertRow(0);
+		var cell1 = row.insertCell(0);
+		cell1.innerHTML = message.toString();
+        
+      });
+
+      document.querySelector('button').addEventListener('click', function() {
+        client.publish('JavaScriptUser', '0,0');
+        var tab=document.getElementById("myTable");
+        var row = tab.deleteRow(0);
+      });
+    </script>
+  </body>
+</html>
