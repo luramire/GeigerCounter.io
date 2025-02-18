@@ -3,8 +3,8 @@
 #include <WiFi.h>
 #include <MQTT.h>
  
-const char* ssid = "RamirezGarcia"; //"Necro"; //"RAMIREZ_GARCIA";//"RamirezGarcia"; //IoT-testing // "Necro"
-const char* password = "user15371333"; // "frxy8415"; // "83862900";//"user15371333";//12345678 // "frxy8415"
+const char* ssid = "put wifiname here";
+const char* password = "put wifi password here";
 const char* mqttServer = "wemosesp32battery.cloud.shiftr.io";
 
 int start_time;
