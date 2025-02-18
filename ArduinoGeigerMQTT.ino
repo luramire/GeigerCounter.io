@@ -5,7 +5,7 @@
  
 const char* ssid = "put wifiname here";
 const char* password = "put wifi password here";
-const char* mqttServer = "wemosesp32battery.cloud.shiftr.io";
+const char* mqttServer = "yourmqttserverhere.cloud.shiftr.io";
 
 int start_time;
 byte led=0;
@@ -29,7 +29,7 @@ void setup() {
 
  mqttClient.begin(mqttServer, espClient);
 
- while (!mqttClient.connect("ESP32", "wemosesp32battery", "public")) {//ClientID, instance name, secret token
+ while (!mqttClient.connect("cliendid_here", "instancename_here", "token_here")) {//ClientID, instance name, secret token
     Serial.println("Connecting to mqtt server...");
     delay(1000);
   }
